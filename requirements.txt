@@ -1,0 +1,3 @@
+flask-restful
+pyparsing
+scipy
