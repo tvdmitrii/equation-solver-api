@@ -1,0 +1,91 @@
+phi = 14.5
+m = 4
+N_p1 = 12
+n_in_n_out = 36
+n_in_n_2 = 6
+n_3_n_out = 6
+H_in = 1
+n_in = 1200*2*pi()/60
+eta = 0.95
+Life = 14000
+
+LBB1 = 30
+LBB1_P1 = 60
+LBB2_G1 = 50
+LG1_P2 = 50
+LP2_BB3 = 50
+LG2_BB4 = 60
+LBB4 = 30
+
+N_g1 / N_p1 = n_in_n_2
+N_p2 = N_p1
+N_g1 = N_g2
+
+d_p1 = m*N_p1
+d_p2 = m*N_p2
+d_g1 = m*N_g1
+d_g2 = m*N_g2
+
+omega_p1 = n_in
+omega_g1 = omega_p1 / n_in_n_2
+omega_p2 = omega_g1
+omega_g2 = omega_p2 / n_3_n_out
+
+H_in =  W_t_p1 * omega_p1 * d_p1 / 2 / 1000
+W_t_g1 = W_t_p1 * x
+H_g1 =  W_t_g1 * omega_g1 * d_g1 / 2 / 1000
+
+H_g1 = H_p2
+H_p2 =  W_t_p2 * omega_p2 * d_p2 / 2 / 1000
+
+W_t_g2 = W_t_p2 * x
+H_g2 =  W_t_g2 * omega_g2 * d_g2 / 2 / 1000
+
+H_g2 / H_in = 0.95
+
+W_n_p1 = tan(phi) * W_t_p1
+W_n_g1 = tan(phi) * W_t_g1
+W_n_p2 = tan(phi) * W_t_p2
+W_n_g2 = tan(phi) * W_t_g2
+
+W_p1_z = - W_t_p1
+W_p1_y = - W_n_p1
+W_g1_z = W_t_g1
+W_g1_y = W_n_g1
+
+W_p2_z = - W_t_p2
+W_p2_y = W_n_p2
+W_g2_z = W_t_g2
+W_g2_y = -W_n_g2
+
+BB2_BB1 = LBB1_P1 - LBB1
+P1_BB1 = LBB1_P1
+
+G1_BB3 = LBB2_G1
+P2_BB3 = G1_BB3 + LG1_P2
+BB4_BB3 = P2_BB3 + LP2_BB3
+
+G2_BB6 = LG2_BB4
+BB5_BB6 = G2_BB6 - LBB4
+
+R_BB1_z + R_BB2_z + W_p1_z = 0
+R_BB1_y + R_BB2_y + W_p1_y = 0
+-R_BB2_z*BB2_BB1 - W_p1_z*P1_BB1 = 0
+R_BB2_y*BB2_BB1 + W_p1_y*P1_BB1 = 0
+
+R_BB3_z + R_BB4_z + W_g1_z + W_p2_z = 0
+R_BB3_y + R_BB4_y + W_g1_y + W_p2_y= 0
+- W_g1_z*G1_BB3 - W_p2_z * P2_BB3 - R_BB4_z*BB4_BB3 = 0
+W_g1_y*G1_BB3 + W_p2_y * P2_BB3 + R_BB4_y*BB4_BB3 = 0
+
+R_BB5_z + R_BB6_z + W_g2_z = 0
+R_BB5_y + R_BB6_y + W_g2_y = 0
+W_g2_z*G2_BB6 + R_BB5_z*BB5_BB6 = 0
+- W_g2_y*G2_BB6 - R_BB5_y*BB5_BB6 = 0
+
+R_BB1 = sqrt(R_BB1_y^2 + R_BB1_z^2)
+R_BB2 = sqrt(R_BB2_y^2 + R_BB2_z^2)
+R_BB3 = sqrt(R_BB3_y^2 + R_BB3_z^2)
+R_BB4 = sqrt(R_BB4_y^2 + R_BB4_z^2)
+R_BB5 = sqrt(R_BB5_y^2 + R_BB5_z^2)
+R_BB6 = sqrt(R_BB6_y^2 + R_BB6_z^2)
